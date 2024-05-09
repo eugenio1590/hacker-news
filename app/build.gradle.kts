@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.retrofit)
+    implementation(libs.androidx.paging)
     implementation(libs.androidx.room.runtime)
     kapt(libs.androidx.room.compiler)
     testImplementation(libs.junit)
