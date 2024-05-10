@@ -10,7 +10,7 @@ import com.app.hackernews.domain.PostRepository
  * @param service The service providing access to the remote data.
  */
 class RemoteDataSource(
-    private val mapper: PostMapper,
+    private val mapper: PostMapper = PostMapper(),
     private val service: PostService
 ) : PostRepository {
     override suspend fun getAll(page: Int, limit: Int): List<Post> {

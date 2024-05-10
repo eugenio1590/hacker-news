@@ -8,14 +8,19 @@ import androidx.paging.cachedIn
 import com.app.hackernews.config.Constants.PAGE_SIZE
 import com.app.hackernews.domain.Post
 import com.app.hackernews.domain.PostRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
 /**
  * ViewModel for managing the UI state and logic related to posts search.
  *
  * @param postRepository The repository responsible for providing access to post data.
  */
-class ViewModel(private val postRepository: PostRepository) : androidx.lifecycle.ViewModel() {
+@HiltViewModel
+class ViewModel @Inject constructor (
+    private val postRepository: PostRepository
+) : androidx.lifecycle.ViewModel() {
 
     val posts: Flow<PagingData<Post>> by lazy {
         val config = PagingConfig(pageSize = PAGE_SIZE, initialLoadSize = PAGE_SIZE)

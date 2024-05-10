@@ -7,12 +7,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.app.hackernews.presentation.ViewModel
 import com.app.hackernews.ui.screen.PostScreen
+import com.app.hackernews.ui.screen.PostsScreen
 import com.app.hackernews.ui.theme.HackerNewsTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +31,8 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     NavHost(navController = navController, startDestination = "posts") {
                         composable("posts") {
-                            // TODO: inject ViewModel
-                            // PostsScreen { url -> navController.navigate("post?webpage=$url") }
+                            val viewModel = hiltViewModel<ViewModel>()
+                            PostsScreen(viewModel) { url -> navController.navigate("post?webpage=$url") }
                         }
                         composable("post?webpage={url}") { backStackEntry ->
                             val url = backStackEntry.arguments?.getString("url")

@@ -10,7 +10,7 @@ import com.app.hackernews.domain.PostRepository
  * @param dao The Data Access Object (DAO) for accessing post entities in the local database.
  */
 class LocalDataSource(
-    private val mapper: PostMapper,
+    private val mapper: PostMapper = PostMapper(),
     private val dao: PostDao
 ) : PostRepository {
     override suspend fun getAll(page: Int, limit: Int): List<Post> {

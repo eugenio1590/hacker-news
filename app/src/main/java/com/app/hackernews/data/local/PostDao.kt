@@ -1,13 +1,11 @@
 package com.app.hackernews.data.local
 
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 
 /**
  * Data Access Object (DAO) for accessing post entities in the local database.
  */
+@Dao
 interface PostDao {
     /**
      * Retrieves a post entity by its ID.
@@ -16,7 +14,7 @@ interface PostDao {
      * @return The post entity if found, otherwise null.
      */
     @Query("SELECT * FROM posts WHERE id = :id LIMIT 1")
-    fun find(id: String): PostEntity?
+    suspend fun find(id: String): PostEntity?
 
     /**
      * Retrieves a list of post entities with pagination support.
@@ -26,11 +24,11 @@ interface PostDao {
      * @return A list of post entities within the specified range.
      */
     @Query("SELECT * FROM posts WHERE is_deleted = '0' ORDER BY created_at LIMIT :limit OFFSET :offset")
-    fun getAll(offset: Int, limit: Int): List<PostEntity>
+    suspend fun getAll(offset: Int, limit: Int): List<PostEntity>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun saveAll(vararg posts: PostEntity)
+    suspend fun saveAll(vararg posts: PostEntity)
 
     @Update
-    fun update(post: PostEntity)
+    suspend fun update(post: PostEntity)
 }

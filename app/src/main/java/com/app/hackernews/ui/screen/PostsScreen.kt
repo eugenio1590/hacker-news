@@ -13,7 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
@@ -22,7 +21,7 @@ import com.github.marlonlom.utilities.timeago.TimeAgo
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PostsScreen(viewModel: ViewModel = viewModel(), onPostSelect: (url: String?) -> Unit) {
+fun PostsScreen(viewModel: ViewModel, onPostSelect: (url: String?) -> Unit) {
     val posts = viewModel.posts.collectAsLazyPagingItems()
     val pullRefreshState = rememberPullToRefreshState()
     val isLoading = posts.loadState.append is LoadState.Loading
