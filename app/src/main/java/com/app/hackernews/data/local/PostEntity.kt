@@ -21,7 +21,7 @@ data class PostEntity(
     val id: String,
     val title: String,
     val author: String,
-    val url: String?,
+    val url: String? = null,
     @ColumnInfo(name = "created_at")
     val createdAt: LocalDateTime,
     @ColumnInfo(name = "is_deleted")

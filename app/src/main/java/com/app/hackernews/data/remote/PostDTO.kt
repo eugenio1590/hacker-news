@@ -28,6 +28,7 @@ data class PostDTO(
     @SerialName("author")
     val author: String,
     @SerialName("story_url")
+    @JsonNames("url")
     val url: String? = null,
     @SerialName("created_at")
     val createdAt: String

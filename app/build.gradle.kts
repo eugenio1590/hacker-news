@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter)
     implementation(libs.androidx.paging)
+    implementation(libs.androidx.navigation)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.timeago)

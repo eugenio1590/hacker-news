@@ -1,5 +1,6 @@
 package com.app.hackernews.ui.screen
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -21,7 +22,7 @@ import com.github.marlonlom.utilities.timeago.TimeAgo
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PostsScreen(viewModel: ViewModel = viewModel()) {
+fun PostsScreen(viewModel: ViewModel = viewModel(), onPostSelect: (url: String?) -> Unit) {
     val posts = viewModel.posts.collectAsLazyPagingItems()
     val pullRefreshState = rememberPullToRefreshState()
     val isLoading = posts.loadState.append is LoadState.Loading
@@ -46,7 +47,9 @@ fun PostsScreen(viewModel: ViewModel = viewModel()) {
                 val post = posts[index]
                 if (post != null) {
                     ListItem(
-                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                        modifier = Modifier
+                            .padding(horizontal = 16.dp, vertical = 8.dp)
+                            .clickable { onPostSelect(post.url) },
                         headlineContent = { Text(post.title) },
                         supportingContent = {
                             val time = post.creationMoment.toInstant().toEpochMilli()
