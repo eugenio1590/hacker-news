@@ -1,6 +1,10 @@
 package com.app.hackernews.data.local
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Update
 
 /**
  * Data Access Object (DAO) for accessing post entities in the local database.
@@ -23,7 +27,7 @@ interface PostDao {
      * @param limit The maximum number of post entities to retrieve.
      * @return A list of post entities within the specified range.
      */
-    @Query("SELECT * FROM posts WHERE is_deleted = '0' ORDER BY created_at LIMIT :limit OFFSET :offset")
+    @Query("SELECT * FROM posts WHERE is_deleted = '0' ORDER BY created_at DESC LIMIT :limit OFFSET :offset")
     suspend fun getAll(offset: Int, limit: Int): List<PostEntity>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

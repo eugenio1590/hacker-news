@@ -1,8 +1,8 @@
 package com.app.hackernews.data.remote
 
 import com.app.hackernews.domain.Post
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 /**
  * Mapper class for converting between PostDTO and Post entities.
@@ -11,17 +11,15 @@ import java.time.format.DateTimeFormatter
  */
 class PostMapper {
 
-    private companion object {
-        val DATE_FORMATER: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
-    }
-
     fun toEntity(dto: PostDTO): Post {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+        val createdAt = dateFormat.parse(dto.createdAt) ?: throw Error("created_at could not be null")
         return Post(
             id = dto.id,
             title = dto.title,
             author = dto.author,
             url = dto.url,
-            createdAt = LocalDateTime.parse(dto.createdAt, DATE_FORMATER)
+            createdAt = createdAt.time
         )
     }
 

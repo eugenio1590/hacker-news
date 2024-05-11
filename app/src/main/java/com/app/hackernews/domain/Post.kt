@@ -1,9 +1,5 @@
 package com.app.hackernews.domain
 
-import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.ZonedDateTime
-
 /**
  * Class representing a post on Hacker News.
  *
@@ -18,12 +14,5 @@ data class Post(
     val title: String,
     val author: String,
     val url: String?,
-    val createdAt: LocalDateTime
-) {
-    /**
-     * Represents the creation moment of the post.
-     *
-     * @see createdAt
-     */
-    val creationMoment: ZonedDateTime = createdAt.atZone(ZoneId.systemDefault())
-}
+    val createdAt: Long
+)

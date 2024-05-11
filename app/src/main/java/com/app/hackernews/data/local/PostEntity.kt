@@ -22,7 +22,7 @@ data class PostEntity(
     val author: String,
     val url: String?,
     @ColumnInfo(name = "created_at")
-    val createdAt: String,
+    val createdAt: Long,
     @ColumnInfo(name = "is_deleted")
     val isDeleted: Boolean
 )

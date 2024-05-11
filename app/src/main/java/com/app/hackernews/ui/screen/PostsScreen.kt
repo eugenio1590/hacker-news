@@ -5,7 +5,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
@@ -51,8 +56,7 @@ fun PostsScreen(viewModel: ViewModel, onPostSelect: (url: String?) -> Unit) {
                             .clickable { onPostSelect(post.url) },
                         headlineContent = { Text(post.title) },
                         supportingContent = {
-                            val time = post.creationMoment.toInstant().toEpochMilli()
-                            val timeAgo = TimeAgo.using(time)
+                            val timeAgo = TimeAgo.using(post.createdAt)
                             Text("${post.author} - $timeAgo")
                         }
                     )
